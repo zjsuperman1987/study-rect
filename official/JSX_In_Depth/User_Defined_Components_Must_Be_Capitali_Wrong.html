@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <script src="../../reactJs/react-development.js"></script>
+        <script src="../../reactJs//react-dom-development.js"></script>
+        <script src="../../reactJs//babel.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="text/babel">
+            const root = ReactDOM.createRoot(document.getElementById('root'));
+
+            //#region User-Defined Components Must Be Capitalized
+
+            //#region 1、错误代码
+
+            // Wrong! This is a component and should have been capitalized:
+            function hello(props) {
+                // Correct! This use of <div> is legitimate because div is a valid HTML tag:
+                return <div>Hello {props.toWhat}</div>;
+            }
+
+            function HelloWorld() {
+                // Wrong! React thinks <hello /> is an HTML tag because it's not capitalized:
+                return <hello toWhat="World" />;
+            }
+            
+            root.render(<HelloWorld />)
+
+            //#endregion
+
+            
+            //#endregion
+        </script>
+    </body>
+</html>

@@ -1,0 +1,168 @@
+<html>
+    <head>
+        <script src="../../reactJs/react-development.js"></script>
+        <script src="../../reactJs//react-dom-development.js"></script>
+        <script src="../../reactJs//babel.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+        <div id="root1"></div>
+        <div id="root2"></div>
+        <div id="root3"></div>
+        <div id="root4"></div>
+        <div id="root5"></div>
+        <div id="root6"></div>
+        <div id="root7"></div>
+        <div id="root8"></div>
+        <div id="root9"></div>
+        <div id="root10"></div>
+        <div id="root11"></div>
+        <div id="root12"></div>
+
+        <script type="text/babel">
+            const root = ReactDOM.createRoot(document.getElementById('root'));
+            const root1 = ReactDOM.createRoot(document.getElementById('root1'));
+            const root2 = ReactDOM.createRoot(document.getElementById('root2'));
+            const root3 = ReactDOM.createRoot(document.getElementById('root3'));
+            const root4 = ReactDOM.createRoot(document.getElementById('root4'));
+            const root5 = ReactDOM.createRoot(document.getElementById('root5'));
+            const root6 = ReactDOM.createRoot(document.getElementById('root6'));
+            const root7 = ReactDOM.createRoot(document.getElementById('root7'));
+            const root8 = ReactDOM.createRoot(document.getElementById('root8'));
+            const root9 = ReactDOM.createRoot(document.getElementById('root9'));
+            const root10 = ReactDOM.createRoot(document.getElementById('root10'));
+            const root11 = ReactDOM.createRoot(document.getElementById('root11'));
+            const root12 = ReactDOM.createRoot(document.getElementById('root12'));
+
+            //#region Props in JSX
+
+            //#region 1、You can pass any JavaScript expression as a prop, by surrounding it with {}. For example, in this JSX:
+
+            function MyComponent(props) {
+                return <h1>{props.sum}</h1>;
+            }
+
+            root.render(<MyComponent sum={1 + 2 + 3 + 4} />);
+
+            //#endregion
+
+            //#region 2、if statements and for loops are not expressions in JavaScript, so they can’t be used in JSX directly. Instead, you can put these in the surrounding code. For example:
+
+            function NumberDescriber(props) {
+                let description;
+                if (props.number % 2 == 0) {
+                    description = <strong>even</strong>;
+                } else {
+                    description = <i>odd</i>;
+                }
+                return (
+                    <div>
+                        {props.number} is an {description} number
+                    </div>
+                );
+            }
+
+            root1.render(<NumberDescriber number={2} />);
+            root2.render(<NumberDescriber number={3} />);
+
+            //#endregion
+
+            //#region 3、String Literals
+
+            class NewMyComponent extends React.Component {
+                render() {
+                    return <div>{this.props.message}</div>;
+                }
+            }
+
+            root3.render(<NewMyComponent message="&lt;3" />);
+            root4.render(<NewMyComponent message={'<3'} />);
+
+            //#endregion
+
+            //#region 4.1、spread Attributes
+
+            function Greeting(props) {
+                return (
+                    <div>
+                        {props.firstName} {props.lastName}
+                    </div>
+                );
+            }
+
+            function App2() {
+                const props = { firstName: 'Ben', lastName: 'Hector' };
+                return <Greeting {...props} />;
+            }
+
+            root5.render(<App2 />);
+
+            //#endregion
+
+            //#region 4.2、Spread Attributes
+            const Button = props => {
+                const { kind, ...other } = props;
+                const className = kind === 'primary' ? 'PrimaryButton' : 'SecondaryButton';
+                console.log(props);
+                // return <button className={className} {...other} />;
+                return <button className={className} {...props} />;
+            };
+
+            const App = () => {
+                return (
+                    <div>
+                        <Button
+                            kind="primary"
+                            onClick={(e, props) => {
+                                console.log('clicked!');
+                                console.log('e', e);
+                                console.log('props', props);
+                            }}
+                        >
+                            Hello World!
+                        </Button>
+                    </div>
+                );
+            };
+
+            root6.render(<App />);
+
+            //#endregion
+
+            //#region Children in JSX
+
+            function New2MyComponent(props) {
+                return <div>123{props.children}</div>;
+            }
+
+            root7.render(<New2MyComponent>Hello world!</New2MyComponent>);
+            root8.render(<div>This is valid HTML &amp; JSX at the same time.</div>);
+
+            //#endregion
+
+            //#region
+            root9.render(<div>Hello World</div>);
+            root10.render(
+                <div>
+                    Hello World
+                </div>
+                );
+            root11.render(
+                <div>
+                    Hello
+                    World
+                </div>    
+
+            );
+            root12.render(
+                <div>
+
+                    Hello World
+                </div>
+            );
+            //#endregion
+
+            //#endregion
+        </script>
+    </body>
+</html>

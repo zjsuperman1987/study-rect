@@ -1,0 +1,159 @@
+<html>
+    <head>
+        <script src="../../reactJs/react-development.js"></script>
+        <script src="../../reactJs//react-dom-development.js"></script>
+        <script src="../../reactJs//babel.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+        <div id="root1"></div>
+        <div id="root2"></div>
+        <div id="root3"></div>
+        <div id="root4"></div>
+        <div id="root5"></div>
+        <div id="root6"></div>
+        <div id="root7"></div>
+        <div id="root8"></div>
+        <div id="root9"></div>
+        <div id="root10"></div>
+        <div id="root11"></div>
+        <div id="root12"></div>
+
+        <script type="text/babel">
+            const root = ReactDOM.createRoot(document.getElementById('root'));
+            const root1 = ReactDOM.createRoot(document.getElementById('root1'));
+            const root2 = ReactDOM.createRoot(document.getElementById('root2'));
+            const root3 = ReactDOM.createRoot(document.getElementById('root3'));
+            const root4 = ReactDOM.createRoot(document.getElementById('root4'));
+            const root5 = ReactDOM.createRoot(document.getElementById('root5'));
+            const root6 = ReactDOM.createRoot(document.getElementById('root6'));
+            const root7 = ReactDOM.createRoot(document.getElementById('root7'));
+            const root8 = ReactDOM.createRoot(document.getElementById('root8'));
+            const root9 = ReactDOM.createRoot(document.getElementById('root9'));
+            const root10 = ReactDOM.createRoot(document.getElementById('root10'));
+            const root11 = ReactDOM.createRoot(document.getElementById('root11'));
+            const root12 = ReactDOM.createRoot(document.getElementById('root12'));
+
+            //#region JSX Children
+
+            function MyFirstComponent() {
+                return <div>MyFirstComponent</div>;
+            }
+
+            function MySecondComponent() {
+                return <div>MySecondComponent</div>;
+            }
+
+            function MyContainer() {
+                return (
+                    <div>
+                        123
+                        <MyFirstComponent />
+                        <MySecondComponent />
+                    </div>
+                );
+            }
+
+            function CombinComponent() {
+                return (
+                    <MyContainer>
+                        <MyFirstComponent />
+                        <MySecondComponent />
+                    </MyContainer>
+                );
+            }
+
+            const element2 = React.createElement('div', { id: 'test' }, 'Like');
+            root.render(<CombinComponent />);
+
+            //#region 混肴
+            const elementDiv = (
+                <div>
+                    Here is a list:
+                    <ul>
+                        <li>Item 1</li>
+                        <li>Item 2</li>
+                    </ul>
+                </div>
+            );
+
+            root1.render(elementDiv);
+            //#endregion
+
+            //#region 混淆2
+            class Arr extends React.Component {
+                render() {
+                    // No need to wrap list items in an extra element!
+                    return [
+                        // Don't forget the keys :)
+                        <li key="A">First item</li>,
+                        <li key="B">Second item</li>,
+                        <li key="C">Third item</li>,
+                    ];
+                }
+            }
+            root2.render(<Arr />);
+            //#endregion
+
+            //#region 混淆3
+            // Calls the children callback numTimes to produce a repeated component
+            function Repeat(props) {
+                let items = [];
+                for (let i = 0; i < props.numTimes; i++) {
+                    items.push(props.children(i));
+                }
+                console.log('items', items);
+                return <div>{items}</div>;
+            }
+
+            function ListOfTenThings() {
+                return (
+                    <Repeat numTimes={10}>
+                        {index => <div key={index}>This is item {index} in the list</div>}
+                    </Repeat>
+                );
+            }
+
+            root3.render(<ListOfTenThings />);
+            //#endregion
+
+            //#region 混淆4
+            class TestComponent extends React.Component {
+                render() {
+                    return (
+                        <div>
+                            <div />
+
+                            <div></div>
+
+                            <div>{false}</div>
+
+                            <div>{null}</div>
+
+                            <div>{String(undefined)}</div>
+
+                            <div>{true}</div>
+
+                            <div>123</div>
+                        </div>
+                    );
+                }
+            }
+
+            root4.render(<TestComponent />);
+
+            //#endregion
+
+            //#region falsy value 0
+            function Falsy(props) {
+                return <div>{props.messages.length && <MessageList messages={props.messages} />}</div>;
+            }
+
+            root5.render(<Falsy messages={[]} />)
+
+            //#endregion
+
+            //#endregion
+        </script>
+    </body>
+</html>

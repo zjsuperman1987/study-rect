@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <script src="../../reactJs/react-development.js"></script>
+        <script src="../../reactJs//react-dom-development.js"></script>
+        <script src="../../reactJs//babel.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="text/babel">
+            const root = ReactDOM.createRoot(document.getElementById('root'));
+
+            //#region 1、函数式组件
+            function Welcome(props) {
+                return <h1>Hello, {props?.name}</h1>;
+            }
+            // root.render(Welcome({name: '张三'}))
+            root.render(<Welcome name="李四" />);
+            //#endregion
+
+            //#region 2、类式组件
+            class NewWelcome extends React.Component {
+                render() {
+                    console.log('this', this);
+                    return <h1>Hello, {this.props.name} </h1>;
+                }
+            }
+            root.render(<NewWelcome name="测试" />);
+            //#endregion
+
+            //#region 3、渲染组件
+            function New2Welcome(props) {
+                return <h1>Hello, {props.name}</h1>;
+            }
+
+            const element = <New2Welcome name="新名字！" />;
+            root.render(element);
+            //#endregion
+
+            //#region 重复渲染
+            function NewWelcome1(props) {
+                return <h1>Hello, {props.name}</h1>;
+            }
+
+            function App() {
+                return (
+                    <div>
+                        <NewWelcome1 name="Sara" />
+                        <NewWelcome1 name="Cahal" />
+                        <NewWelcome1 name="Edite" />
+                    </div>
+                );
+            }
+            root.render(<App />);
+            function NewWelcome2(props) {
+                props.name.name = '张三';
+                props.handleEvent(props);
+
+                return <h1>Hello, {props.name.name}</h1>;
+            }
+
+            //#region
+            function App1() {
+                return (
+                    <div>
+                        <NewWelcome2
+                            name={{ name: '李四' }}
+                            handleEvent={props => console.log(props)}
+                        />
+                    </div>
+                );
+            }
+            root.render(<App1 />);
+            //#endregion
+
+            //#region Extracting Components
+
+            function formatDate(date) {
+                return date
+            }
+
+            function Comment(props) {
+                return (
+                    <div className="Comment">
+                        <div className="UserInfo">
+                            <img
+                                className="Avatar"
+                                src={props.author.avatarUrl}
+                                alt={props.author.name}
+                            />
+                            <div className="UserInfo-name">{props.author.name}</div>
+                        </div>
+                        <div className="Comment-text">{props.text}</div>
+                        <div className="Comment-date">{formatDate(props.date)}</div>
+                    </div>
+                );
+            }
+
+
+            root.render(<Comment author={{ avatarUrl: 'www.baidu.com', name: '测试' }}/>)
+
+            //#endregion
+
+            //#endregion
+        </script>
+    </body>
+</html>

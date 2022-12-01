@@ -1,0 +1,98 @@
+<html>
+    <head>
+        <script src="../../reactJs/react-development.js"></script>
+        <script src="../../reactJs//react-dom-development.js"></script>
+        <script src="../../reactJs//babel.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <!-- 脚本 -->
+        <script type="text/babel">
+            // varible
+            const name = 'Josh Perez';
+            const element = <h1>hello, world {name}</h1>;
+
+            // function
+            function formatName(user) {
+                return user.firstName + ' ' + user.lastName;
+            }
+            const user = {
+                firstName: 'Harper',
+                lastName: 'Perez',
+            };
+            const element_function = <h1>我是方法表达式{formatName(user)}</h1>;
+
+            // jsx is an express to
+            function getGreeting(user) {
+                if (user) {
+                    return <h1>Hello, {formatName(user)}!</h1>;
+                }
+                return <h1>Hello, Stranger.</h1>;
+            }
+            const element_jsx = getGreeting();
+
+            // attributes
+            const element_a = <a href="www.baidu.com"></a>;
+
+            // specifying children with jsx
+            const element_children = (
+                <div>
+                    <h1>Hello</h1>
+                    <h2>Good to see you</h2>
+                </div>
+            );
+
+            // these two example are identical
+            const element_identical_1 = <h1 className="greeting">Hello, World!</h1>;
+            const element_identical_2 = React.createElement(
+                'h1',
+                { className: 'greeting' },
+                'Hello, World!'
+            );
+
+            // 生成
+            const root = ReactDOM.createRoot(document.querySelector('#root'));
+
+            // const wrapper = (
+            //     <>
+            //         {element}
+            //         {element_function}
+            //         {element_jsx}
+            //         {element_a}
+            //         {element_children}
+            //         {element_identical_1}
+            //         {element_identical_2}
+            //     </>
+            // );
+
+            // function Components () {
+            //     return (
+            //         <>
+            //         {element}
+            //         {element_function}
+            //         {element_jsx}
+            //         {element_a}
+            //         {element_children}
+            //         {element_identical_1}
+            //         {element_identical_2}
+            //     </>
+            //     )
+            // }
+
+            // root.render(<Components />);
+            
+            root.render(element)
+            root.render(element_function)
+            // root.render(element_jsx)
+            // root.render(element_a)
+            // root.render(element_children)
+            // root.render(element_identical_1)
+            // root.render(element_identical_2)
+
+
+        </script>
+
+        <script></script>
+    </body>
+</html>

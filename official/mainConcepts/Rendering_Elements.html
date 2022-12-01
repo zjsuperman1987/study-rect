@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <script src="../../reactJs/react-development.js"></script>
+        <script src="../../reactJs//react-dom-development.js"></script>
+        <script src="../../reactJs//babel.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <!-- 脚本 -->
+        <script type="text/babel">
+            const root = ReactDOM.createRoot(document.getElementById('root'));
+
+            const element = <h1>Hello, everyone</h1>;
+            root.render(element);
+
+            function tick() {
+                const element = (
+                    <div>
+                        <h1>hello world</h1>
+                        <h2>It is {new Date().toLocaleTimeString()}</h2>
+                    </div>
+                );
+                root.render(element);
+            }
+
+            // tick()
+            setInterval(tick, 1000);
+        </script>
+    </body>
+</html>
